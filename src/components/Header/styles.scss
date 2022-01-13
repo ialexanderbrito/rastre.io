@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  background: #F0F0F0;
+  width: 100%;
+  height: 3.5rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+.logo {
+  cursor: pointer;
+}
+
+strong {
+  cursor: pointer;
+
+  &:hover {
+    color: #FFC100;
+    transition: 0.4s;
+  }
+}
