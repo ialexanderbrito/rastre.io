@@ -1,70 +1,110 @@
-# Getting Started with Create React App
+<h1 align="center">
+  <img src=".github/logo.svg" width="250px" />
+</h1>
+<h4 align="center">
+ <b>📦 rastre.io de encomendas via Correios</b>
+</h4>
+<p align="center">
+  <img alt="GitHub Language Count" src="https://img.shields.io/github/languages/count/ialexanderbrito/rastre.io?style=flat-square" />
+  <img alt="GitHub Top Language" src="https://img.shields.io/github/languages/top/ialexanderbrito/rastre.io?style=flat-square" />
+  <img alt="" src="https://img.shields.io/github/repo-size/ialexanderbrito/rastre.io?style=flat-square" />
+  <img alt="GitHub Issues" src="https://img.shields.io/github/issues/ialexanderbrito/rastre.io?style=flat-square" />
+  <img alt="GitHub Last Commit" src="https://img.shields.io/github/last-commit/ialexanderbrito/rastre.io?style=flat-square" />
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+</p>
 
-## Available Scripts
+<br>
 
-In the project directory, you can run:
+### 🧪 Tecnologias usadas
+Esse projeto foi desenvolvido com as seguintes tecnologias:
+- [ReactJS](https://reactjs.org/)
+- [JavaScript](https://www.javascript.com/)
 
-### `yarn start`
+Extras:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Main Libs
+  - [Sass](https://sass-lang.com/)
+  - Para mais detalhes, veja o <kbd>[package.json](https://github.com/ialexanderbrito/rastre.io/blob/master/package.json)</kbd>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Estilos
+  - [EditorConfig](https://editorconfig.org/)
+  - [ESLint](https://eslint.org/)
+  - [Prettier](https://prettier.io/)
 
-### `yarn test`
+### 💻 Demo Web
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[Visite o site](https://rastreio.ialexanderbrito.dev/)
 
-### `yarn build`
+### 💻 Projeto
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+rastre.io é um projeto com intuito de facilitar a busca de encomendas via Correios. E acoplado com o busca.cep que facilita a busca de endereços pelo CEP.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### ⚙ Como rodar este projeto
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Pré-requisitos
 
-### `yarn eject`
+Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<b>[Git](https://git-scm.com)</b>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<b>[Node.js](https://nodejs.org/en/)</b>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+E também será preciso um editor, eu indico o <b>[VSCode](https://code.visualstudio.com/)</b>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 🧭 Rodando o Frontend
 
-## Learn More
+```bash
+# Clone este repositório
+$ git clone https://github.com/ialexanderbrito/rastre.io
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Acesse a pasta do projeto no terminal/cmd
+$ cd rastre.io
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Instale as dependências
+$ npm install ou yarn
 
-### Code Splitting
+# Execute a aplicação em modo de desenvolvimento
+$ npm run dev ou yarn dev
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+# O servidor inciará na porta:3000 - acesse http://localhost:3000
+```
 
-### Analyzing the Bundle Size
+### :recycle: Como contribuir
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Fork esse repositório;
+- Crie uma branch com a sua feature: `git checkout -b my-feature`
+- Commit suas mudanças: `git commit -m 'feat: My new feature'`
+- Push a sua branch: `git push origin my-feature`
 
-### Making a Progressive Web App
+Depois que o merge da sua pull request for feito, você pode deletar a sua branch.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### :memo: Licença
 
-### Advanced Configuration
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### 📱 Social
 
-### Deployment
+Me acompanhe nas minhas redes sociais.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<p align="center">
 
-### `yarn build` fails to minify
+ <a href="https://twitter.com/ialexanderbrito" target="_blank" >
+     <img alt="Twitter" src="https://img.shields.io/badge/-Twitter-9cf?style=flat-square&logo=Twitter&logoColor=white"></a>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  <a href="https://instagram.com/ialexanderbrito" target="_blank" >
+    <img alt="Instagram" src="https://img.shields.io/badge/-Instagram-ff2b8e?style=flat-square&logo=Instagram&logoColor=white"></a>
+
+  <a href="https://www.linkedin.com/in/ialexanderbrito/" target="_blank" >
+    <img alt="Linkedin" src="https://img.shields.io/badge/-Linkedin-blue?style=flat-square&logo=Linkedin&logoColor=white"></a>
+
+  <a href="https://t.me/ialexanderbrito" target="_blank" >
+    <img alt="Telegram" src="https://img.shields.io/badge/-Telegram-blue?style=flat-square&logo=Telegram&logoColor=white"></a>
+
+  <a href="mailto:ialexanderbrito@gmail.com" target="_blank" >
+    <img alt="Email" src="https://img.shields.io/badge/-Email-c14438?style=flat-square&logo=Gmail&logoColor=white"></a>
+
+</p>
+
+---
+
+Feito com ❤️ by **Alexander** 🤙🏾
