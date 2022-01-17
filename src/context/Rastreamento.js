@@ -29,8 +29,6 @@ export function RastreamentoProvider({ children }) {
         );
       }
 
-      console.log(result);
-
       if (result.data.objetos[0].mensagem) {
         toast.error(result.data.objetos[0].mensagem, { id: 'codigoRastreio' });
         setObjeto([]);
