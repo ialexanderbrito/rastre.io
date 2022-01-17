@@ -22,12 +22,21 @@ export function RastreamentoProvider({ children }) {
       const result = await getRastreio(codigoRastreio);
       toast.success('Rastreio encontrado!', { id: 'codigoRastreio' });
 
-      if (result.objetos[0].mensagem) {
-        toast.error(result.objetos[0].mensagem, { id: 'codigoRastreio' });
+      if (result.status !== 200) {
+        toast.error(
+          'Ops! Erro com a API, entre em contato com @ialexanderbrito',
+          { id: 'codigoRastreio' }
+        );
+      }
+
+      console.log(result);
+
+      if (result.data.objetos[0].mensagem) {
+        toast.error(result.data.objetos[0].mensagem, { id: 'codigoRastreio' });
         setObjeto([]);
       }
 
-      setObjeto(result.objetos[0]);
+      setObjeto(result.data.objetos[0]);
     } else {
       toast('Informe o código de rastreio', { id: 'codigoRastreio' });
     }
