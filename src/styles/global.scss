@@ -6,8 +6,27 @@
 }
 
 body {
-  background: #DDDDDD;
-  color: #1b1b1b;
+  background: var(--background);
+  color: var(--text-primary);
+}
+
+:root {
+  --background: #DDDDDD;
+  --background-content: #FFF;
+  --header: #F0F0F0;
+  --text-primary: #1b1b1b;
+  --text-primary-btn: #FFF;
+  --text-secondary: #FFC100;
+  --lm-shadow-active: rgb(0 0 0 / 18%) 0px 2px 12px;
+}
+
+[data-theme='dark'] {
+  --background: #2B2F31;
+  --background-content: #181A1B;
+  --header: #202325;
+  --text-primary: #D7D3CE;
+  --text-primary-btn: #D7D3CE;
+  --text-secondary: #FFC100;
 }
 
 ::-webkit-input-placeholder {

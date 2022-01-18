@@ -16,13 +16,18 @@
   height: 100%;
   min-height: 94vh;
   padding: 20px;
+  background: var(--background);
 
   strong {
-    color: #FFC100;
+    color: var(--text-secondary);
   }
 
   b{
     font-weight: 400;
+  }
+
+  h1 {
+    color: var(--text-primary);
   }
 }
 
@@ -37,11 +42,13 @@
   width: 18rem;
   height: 50px;
   border-radius: 5px;
-  border: 1px solid #FFC100;
+  border: 1px solid var(--text-secondary);
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
   padding: 0 20px;
   text-transform: uppercase;
+  background: var(--background-content);
+  color: var(--text-primary);
 
   &:focus {
     outline: none;
@@ -52,11 +59,11 @@
   width: 4rem;
   height: 50px;
   border-radius: 5px;
-  border: 1px solid #FFC100;
+  border: 1px solid var(--text-secondary);
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
-  background: #FFC100;
-  color: #fff;
+  background: var(--text-secondary);
+  color: var(--text-primary-btn);
   font-weight: bold;
   font-size: 16px;
   cursor: pointer;
@@ -70,15 +77,19 @@
 
 .container-evento {
   display: flex;
-  background: #fff;
+  background: var(--background-content);
   border-radius: 5px;
-  box-shadow: rgb(0 0 0 / 18%) 0px 2px 12px;
+  box-shadow: var(--lm-shadow-active);
   margin: auto;
   margin-bottom: 1rem;
   width: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  span {
+    color: var(--text-primary)
+  }
 }
 
 .container-info {
@@ -96,7 +107,7 @@
   justify-content: start;
 
   span {
-    color: #1b1b1b;
+    color: var(--text-primary);
     font-weight: bold;
     font-size: 1rem;
     margin-left: 1rem;
@@ -158,5 +169,6 @@
     height: 100%;
     min-height: 94vh;
     padding: 20px;
+    background: var(--background);
   }
 }

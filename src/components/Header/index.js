@@ -1,10 +1,13 @@
+import { BiMoon, BiSun } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 
 import logoImg from 'assets/logo.svg';
+import { useTheme } from 'context/Theme';
 
 import './styles.scss';
 
 export function Header() {
+  const { switchTheme, theme } = useTheme();
   const navigate = useNavigate();
 
   function navigateToCep() {
@@ -34,25 +37,47 @@ export function Header() {
         className="logo"
         onClick={() => window.location.replace('/')}
       />
-      {verificarURL() === 'CEP' ? (
-        <strong
+      <div className="mode">
+        {verificarURL() === 'CEP' ? (
+          <strong
+            aria-hidden="true"
+            onClick={() => {
+              navigateToRastreio();
+            }}
+          >
+            rastre.io
+          </strong>
+        ) : (
+          <strong
+            aria-hidden="true"
+            onClick={() => {
+              navigateToCep();
+            }}
+          >
+            busca.cep
+          </strong>
+        )}
+        <div
           aria-hidden="true"
           onClick={() => {
-            navigateToRastreio();
+            switchTheme();
           }}
         >
-          rastre.io
-        </strong>
-      ) : (
-        <strong
-          aria-hidden="true"
-          onClick={() => {
-            navigateToCep();
-          }}
-        >
-          busca.cep
-        </strong>
-      )}
+          {theme === 'light' ? (
+            <>
+              <div className="icon">
+                <BiMoon size={20} color="#1b1b1b" />
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="icon">
+                <BiSun size={20} color="#D7D3CE" />
+              </div>
+            </>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

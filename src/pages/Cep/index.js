@@ -3,10 +3,12 @@ import { Helmet } from 'react-helmet';
 import { Header } from 'components/Header';
 
 import { useCep } from 'context/Cep';
+import { useTheme } from 'context/Theme';
 
 import './styles.scss';
 
 export function Cep() {
+  const { theme } = useTheme();
   const {
     cep,
     allCep,
@@ -21,7 +23,7 @@ export function Cep() {
       <Helmet>
         <title>busca.cep</title>
       </Helmet>
-      <div className="wrapper">
+      <div className="wrapper" data-theme={theme}>
         <Header />
         <div className="container">
           <h1>

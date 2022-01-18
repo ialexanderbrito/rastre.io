@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet';
 import { Header } from 'components/Header';
 
 import { useRastreamento } from 'context/Rastreamento';
+import { useTheme } from 'context/Theme';
 
 import './styles.scss';
 
@@ -16,12 +17,14 @@ export function Rastreio() {
     buscarRastreio,
   } = useRastreamento();
 
+  const { theme } = useTheme();
+
   return (
     <>
       <Helmet>
         <title>rastre.io</title>
       </Helmet>
-      <div className="wrapper">
+      <div className="wrapper" data-theme={theme}>
         <Header />
         <div className="container">
           <h1>
