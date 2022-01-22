@@ -17,26 +17,40 @@ export function RastreamentoProvider({ children }) {
   const [objeto, setObjeto] = useState([]);
 
   async function buscarRastreio() {
-    if (codigoRastreio) {
-      toast.loading('Buscando...', { id: 'codigoRastreio' });
-      const result = await getRastreio(codigoRastreio);
-      toast.success('Rastreio encontrado!', { id: 'codigoRastreio' });
+    try {
+      if (codigoRastreio === '') {
+        toast.warn('Por favor, informe o código de rastreio.', {
+          id: 'rastreio',
+        });
+      } else {
+        toast.loading('Buscando informações do rastreio...', {
+          id: 'rastreio',
+        });
 
-      if (result.status !== 200) {
-        toast.error(
-          'Ops! Erro com a API, entre em contato com @ialexanderbrito',
-          { id: 'codigoRastreio' }
-        );
+        const { data, status } = await getRastreio(codigoRastreio);
+
+        if (status === 200) {
+          setObjeto(data.objetos[0]);
+          toast.success('Informações do rastreio obtidas com sucesso.', {
+            id: 'rastreio',
+          });
+        }
+
+        if (status !== 200) {
+          toast.error('Não foi possível obter as informações do rastreio.', {
+            id: 'rastreio',
+          });
+        }
+
+        toast.success('Informações do rastreio obtidas com sucesso.', {
+          id: 'rastreio',
+        });
+        setCodigoRastreio('');
       }
-
-      if (result.data.objetos[0].mensagem) {
-        toast.error(result.data.objetos[0].mensagem, { id: 'codigoRastreio' });
-        setObjeto([]);
-      }
-
-      setObjeto(result.data.objetos[0]);
-    } else {
-      toast('Informe o código de rastreio', { id: 'codigoRastreio' });
+    } catch (error) {
+      toast.error('Não foi possível obter as informações do rastreio.', {
+        id: 'rastreio',
+      });
     }
   }
 
