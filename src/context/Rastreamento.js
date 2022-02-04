@@ -9,10 +9,14 @@ import {
 import { GiHandTruck, GiPostStamp } from 'react-icons/gi';
 
 import { getRastreio } from 'services/rastreio';
+import { supabase } from 'services/supabase';
+
+import { useAuth } from './Auth';
 
 const Rastreamento = createContext();
 
 export function RastreamentoProvider({ children }) {
+  const { user, setUser } = useAuth();
   const [codigoRastreio, setCodigoRastreio] = useState('');
   const [objeto, setObjeto] = useState([]);
 
@@ -45,7 +49,7 @@ export function RastreamentoProvider({ children }) {
         toast.success('Informações do rastreio obtidas com sucesso.', {
           id: 'rastreio',
         });
-        setCodigoRastreio('');
+        // setCodigoRastreio('');
       }
     } catch (error) {
       toast.error('Não foi possível obter as informações do rastreio.', {
@@ -118,15 +122,57 @@ export function RastreamentoProvider({ children }) {
     ${dataFormatada.getHours()}:${dataFormatada.getMinutes()}`;
   }
 
+  async function handleSaveRastreio(rastreio) {
+    if (!user) {
+      toast.error('Você precisa estar logado para salvar o rastreio', {
+        id: 'login',
+      });
+      return;
+    }
+
+    if (codigoRastreio === '') {
+      toast.error('Você precisa digitar um código de rastreio', {
+        id: 'login',
+      });
+      return;
+    }
+
+    const rastreiosData = user.user_metadata.rastreios
+      ? user.user_metadata.rastreios
+      : [];
+
+    if (rastreiosData.length !== 0)
+      if (rastreiosData.find((r) => r === rastreio)) {
+        toast.error('O rastreio já foi salvo', { id: 'login' });
+        return;
+      }
+
+    rastreiosData.push(rastreio);
+
+    const { user: userData, error } = await supabase.auth.update({
+      data: { rastreios: rastreiosData },
+    });
+
+    if (error) {
+      toast.error('Não foi possível salvar o rastreio', { id: 'login' });
+    }
+
+    toast.success('Rastreio salvo com sucesso', { id: 'login' });
+    setUser(userData);
+  }
+
   return (
     <Rastreamento.Provider
       value={{
+        codigoRastreio,
+        setCodigoRastreio,
         objeto,
         handleChangeCodigoRastreio,
         handlePressEnter,
         verificarEvento,
         transformarDataEHora,
         buscarRastreio,
+        handleSaveRastreio,
       }}
     >
       {children}
