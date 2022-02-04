@@ -1,13 +1,15 @@
-import { BiMoon, BiSun } from 'react-icons/bi';
+import { BiMoon, BiSun, BiLogOut } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 
 import logoImg from 'assets/logo.svg';
+import { useAuth } from 'context/Auth';
 import { useTheme } from 'context/Theme';
 
 import './styles.scss';
 
 export function Header() {
   const { switchTheme, theme } = useTheme();
+  const { user, handleLogout } = useAuth();
   const navigate = useNavigate();
 
   function navigateToCep() {
@@ -15,7 +17,11 @@ export function Header() {
   }
 
   function navigateToRastreio() {
-    navigate('/');
+    navigate('/rastreio');
+  }
+
+  function navigateToSalvos() {
+    navigate('/salvos');
   }
 
   function verificarURL() {
@@ -35,7 +41,11 @@ export function Header() {
         src={logoImg}
         alt="Logo"
         className="logo"
-        onClick={() => window.location.replace('/')}
+        onClick={
+          !user
+            ? () => window.location.replace('/')
+            : () => window.location.replace('/rastreio')
+        }
       />
       <div className="mode">
         {verificarURL() === 'CEP' ? (
@@ -57,6 +67,14 @@ export function Header() {
             busca.cep
           </strong>
         )}
+        <strong
+          aria-hidden="true"
+          onClick={() => {
+            navigateToSalvos();
+          }}
+        >
+          salvos
+        </strong>
         <div
           aria-hidden="true"
           onClick={() => {
@@ -77,6 +95,26 @@ export function Header() {
             </>
           )}
         </div>
+        {user && (
+          <>
+            <div
+              aria-hidden="true"
+              onClick={() => {
+                handleLogout();
+              }}
+            >
+              {theme === 'light' ? (
+                <div className="icon">
+                  <BiLogOut size={20} color="#1b1b1b" />
+                </div>
+              ) : (
+                <div className="icon">
+                  <BiLogOut size={20} color="#D7D3CE" />
+                </div>
+              )}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
