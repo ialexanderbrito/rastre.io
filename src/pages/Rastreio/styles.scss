@@ -151,6 +151,28 @@
   }
 }
 
+.button-save {
+  position: absolute;
+  right: 40px;
+  bottom: 40px;
+  z-index: 10;
+  width: 60px;
+  height: 60px;
+  background: var(--text-secondary);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+
+  &:hover {
+    transition: 0.4s;
+    filter: brightness(80%);
+  }
+
+}
+
 @media screen and (min-width: 839px) {
   .wrapper {
     display: flex;

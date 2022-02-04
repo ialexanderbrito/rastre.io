@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
+import { BiBookmark } from 'react-icons/bi';
 
 import { Header } from 'components/Header';
 
@@ -9,15 +11,23 @@ import './styles.scss';
 
 export function Rastreio() {
   const {
+    codigoRastreio,
     objeto,
     handleChangeCodigoRastreio,
     handlePressEnter,
     verificarEvento,
     transformarDataEHora,
     buscarRastreio,
+    handleSaveRastreio,
   } = useRastreamento();
 
   const { theme } = useTheme();
+
+  useEffect(() => {
+    if (codigoRastreio !== '') {
+      buscarRastreio();
+    }
+  }, []);
 
   return (
     <>
@@ -34,6 +44,7 @@ export function Rastreio() {
           <div className="container-rastreio">
             <input
               type="text"
+              value={codigoRastreio}
               maxLength={13}
               className="input"
               onChange={handleChangeCodigoRastreio}
@@ -48,6 +59,16 @@ export function Rastreio() {
               buscar
             </button>
           </div>
+
+          <button
+            className="button-save"
+            type="button"
+            onClick={() => {
+              handleSaveRastreio(codigoRastreio);
+            }}
+          >
+            <BiBookmark color="#FFF" size={24} />
+          </button>
 
           {objeto && (
             <>
