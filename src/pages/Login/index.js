@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 
@@ -9,8 +10,13 @@ import { useTheme } from 'context/Theme';
 import './styles.scss';
 
 export function Login() {
-  const { values, setValues, handleLoginSubmit, handlePageRegistrar } =
-    useAuth();
+  const {
+    values,
+    setValues,
+    handleLoginSubmit,
+    handlePageRegistrar,
+    handleLoginGoogle,
+  } = useAuth();
 
   const { theme } = useTheme();
 
@@ -34,7 +40,28 @@ export function Login() {
             log<strong>.</strong>
             <b>in</b>
           </h1>
-          <form onSubmit={handleLoginSubmit}>
+
+          <div
+            aria-hidden="true"
+            className="google-btn"
+            onClick={() => {
+              handleLoginGoogle();
+            }}
+          >
+            <div className="google-icon-wrapper">
+              <img
+                className="google-icon"
+                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+              />
+            </div>
+            <p className="btn-text">
+              <b>Fazer login com o Google</b>
+            </p>
+          </div>
+
+          <div className="separator">ou </div>
+
+          <form className="space" onSubmit={handleLoginSubmit}>
             <div className="container-login">
               <input
                 type="email"

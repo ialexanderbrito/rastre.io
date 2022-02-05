@@ -16,14 +16,22 @@ export function AuthProvider({ children }) {
     passwordConfirm: '',
   });
 
-  useEffect(() => {
+  async function checkUser() {
     const userData = supabase.auth.user();
 
+    setUser(userData);
+
     if (userData) {
-      setUser(userData);
-    } else {
-      navigate('/');
+      navigate('/rastreio');
     }
+  }
+
+  useEffect(() => {
+    checkUser();
+
+    window.addEventListener('hashchange', () => {
+      checkUser();
+    });
   }, []);
 
   async function handleLoginSubmit(event) {
@@ -53,6 +61,24 @@ export function AuthProvider({ children }) {
     toast.success('Login realizado com sucesso', { id: 'login' });
 
     navigate('/rastreio');
+  }
+
+  async function handleLoginGoogle() {
+    const { user: userData, error } = await supabase.auth.signIn({
+      provider: 'google',
+    });
+
+    if (error && error.message === 'Email not confirmed') {
+      toast.error('Por favor, confirme seu email', { id: 'login' });
+      return;
+    }
+
+    if (error) {
+      toast.error('Erro ao logar', { id: 'login' });
+      return;
+    }
+
+    setUser(userData);
   }
 
   async function handleRegisterSubmit(event) {
@@ -118,6 +144,7 @@ export function AuthProvider({ children }) {
         handleRegisterSubmit,
         handlePageLogin,
         handleLogout,
+        handleLoginGoogle,
       }}
     >
       {children}
