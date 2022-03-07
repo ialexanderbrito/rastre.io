@@ -8,14 +8,18 @@ import {
 } from 'react-icons/bs';
 import { GiHandTruck, GiPostStamp } from 'react-icons/gi';
 
+import { RastreamentoContextProps } from 'types/IContext';
+
 import { getRastreio } from 'services/rastreio';
 import { supabase } from 'services/supabase';
 
 import { useAuth } from './Auth';
 
-const Rastreamento = createContext();
+const Rastreamento = createContext<RastreamentoContextProps>(
+  {} as RastreamentoContextProps
+);
 
-export function RastreamentoProvider({ children }) {
+export function RastreamentoProvider({ children }: any) {
   const { user, setUser } = useAuth();
   const [codigoRastreio, setCodigoRastreio] = useState('');
   const [objeto, setObjeto] = useState([]);
@@ -23,7 +27,7 @@ export function RastreamentoProvider({ children }) {
   async function buscarRastreio() {
     try {
       if (codigoRastreio === '') {
-        toast.warn('Por favor, informe o código de rastreio.', {
+        toast.error('Por favor, informe o código de rastreio.', {
           id: 'rastreio',
         });
       } else {
@@ -58,17 +62,17 @@ export function RastreamentoProvider({ children }) {
     }
   }
 
-  function handleChangeCodigoRastreio(e) {
+  function handleChangeCodigoRastreio(e: { target: { value: string } }) {
     setCodigoRastreio(e.target.value.toUpperCase());
   }
 
-  function handlePressEnter(e) {
+  function handlePressEnter(e: { key: string }) {
     if (e.key === 'Enter') {
       buscarRastreio();
     }
   }
 
-  function verificarEvento(evento) {
+  function verificarEvento(evento: { codigo: string }) {
     if (evento.codigo === 'BDI' || evento.codigo === 'BDE') {
       return (
         <div className="container-icon" style={{ background: '#6EAF2D' }}>
@@ -115,14 +119,14 @@ export function RastreamentoProvider({ children }) {
     );
   }
 
-  function transformarDataEHora(data) {
+  function transformarDataEHora(data: string | number | Date) {
     const dataFormatada = new Date(data);
     return `${dataFormatada.getDate()}/
     ${dataFormatada.getMonth() + 1}/${dataFormatada.getFullYear()}
     ${dataFormatada.getHours()}:${dataFormatada.getMinutes()}`;
   }
 
-  async function handleSaveRastreio(rastreio) {
+  async function handleSaveRastreio(rastreio: string) {
     if (!user) {
       toast.error('Você precisa estar logado para salvar o rastreio', {
         id: 'login',
@@ -142,7 +146,7 @@ export function RastreamentoProvider({ children }) {
       : [];
 
     if (rastreiosData.length !== 0)
-      if (rastreiosData.find((r) => r === rastreio)) {
+      if (rastreiosData.find((r: string) => r === rastreio)) {
         toast.error('O rastreio já foi salvo', { id: 'login' });
         return;
       }

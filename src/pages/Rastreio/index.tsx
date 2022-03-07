@@ -2,10 +2,11 @@ import { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { BiBookmark } from 'react-icons/bi';
 
-import { Header } from 'components/Header';
-
 import { useRastreamento } from 'context/Rastreamento';
 import { useTheme } from 'context/Theme';
+import { Evento } from 'types/IContext';
+
+import { Header } from 'components/Header';
 
 import './styles.scss';
 
@@ -72,7 +73,7 @@ export function Rastreio() {
 
           {objeto && (
             <>
-              {objeto?.eventos?.map((evento) => (
+              {objeto?.eventos?.map((evento: Evento) => (
                 <div key={evento.descricao} className="container-evento">
                   <div className="container-info">
                     {verificarEvento(evento)}

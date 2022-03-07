@@ -1,9 +1,9 @@
 import { Helmet } from 'react-helmet';
 
-import { Header } from 'components/Header';
-
 import { useCep } from 'context/Cep';
 import { useTheme } from 'context/Theme';
+
+import { Header } from 'components/Header';
 
 import './styles.scss';
 

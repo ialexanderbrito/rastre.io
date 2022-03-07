@@ -2,13 +2,15 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
+import { AuthContextProps } from 'types/IContext';
+
 import { supabase } from 'services/supabase';
 
-const AuthContext = createContext();
+const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
 
-export function AuthProvider({ children }) {
+export function AuthProvider({ children }: any) {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<any>();
 
   const [values, setValues] = useState({
     username: '',
@@ -18,6 +20,8 @@ export function AuthProvider({ children }) {
 
   async function checkUser() {
     const userData = supabase.auth.user();
+
+    if (!userData) return;
 
     setUser(userData);
 
@@ -34,13 +38,15 @@ export function AuthProvider({ children }) {
     });
   }, []);
 
-  async function handleLoginSubmit(event) {
+  async function handleLoginSubmit(event: { preventDefault: () => void }) {
     event.preventDefault();
 
     const { user: userData, error } = await supabase.auth.signIn({
       email: values.username,
       password: values.password,
     });
+
+    if (!userData) return;
 
     if (error && error.message === 'Invalid login credentials') {
       toast.error('Usuário ou senha inválidos', { id: 'login' });
@@ -68,6 +74,8 @@ export function AuthProvider({ children }) {
       provider: 'google',
     });
 
+    if (!userData) return;
+
     if (error && error.message === 'Email not confirmed') {
       toast.error('Por favor, confirme seu email', { id: 'login' });
       return;
@@ -81,7 +89,7 @@ export function AuthProvider({ children }) {
     setUser(userData);
   }
 
-  async function handleRegisterSubmit(event) {
+  async function handleRegisterSubmit(event: { preventDefault: () => void }) {
     event.preventDefault();
 
     if (values.password !== values.passwordConfirm) {
@@ -97,6 +105,8 @@ export function AuthProvider({ children }) {
       email: values.username,
       password: values.password,
     });
+
+    if (!userData) return;
 
     if (error) {
       toast.error('Usuário já cadastrado', { id: 'login' });

@@ -1,11 +1,13 @@
 import { createContext, useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 
+import { CepContextProps } from 'types/IContext';
+
 import { getCep } from 'services/cep';
 
-const Cep = createContext();
+const Cep = createContext<CepContextProps>({} as CepContextProps);
 
-export function CepProvider({ children }) {
+export function CepProvider({ children }: any) {
   const [cep, setCep] = useState('');
   const [allCep, setAllCep] = useState([]);
 
@@ -35,12 +37,12 @@ export function CepProvider({ children }) {
     }
   }
 
-  function handleChangeCep(e) {
+  function handleChangeCep(e: { target: { value: string } }) {
     const cepValue = e.target.value.replace(/[^0-9]/g, '');
     setCep(cepValue);
   }
 
-  function handlePressEnter(e) {
+  function handlePressEnter(e: { key: string }) {
     if (e.key === 'Enter') {
       buscarCep();
     }

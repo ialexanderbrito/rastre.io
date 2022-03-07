@@ -1,16 +1,21 @@
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 
-import { Header } from 'components/Header';
-
 import { useAuth } from 'context/Auth';
 import { useTheme } from 'context/Theme';
 
+import { Header } from 'components/Header';
+
 import './styles.scss';
 
-export function Registrar() {
-  const { handleRegisterSubmit, values, setValues, handlePageLogin } =
-    useAuth();
+export function Login() {
+  const {
+    values,
+    setValues,
+    handleLoginSubmit,
+    handlePageRegistrar,
+    handleLoginGoogle,
+  } = useAuth();
 
   const { theme } = useTheme();
 
@@ -31,10 +36,31 @@ export function Registrar() {
         <Header />
         <div className="container">
           <h1>
-            registr<strong>.</strong>
-            <b>ar</b>
+            log<strong>.</strong>
+            <b>in</b>
           </h1>
-          <form onSubmit={handleRegisterSubmit}>
+
+          <div
+            aria-hidden="true"
+            className="google-btn"
+            onClick={() => {
+              handleLoginGoogle();
+            }}
+          >
+            <div className="google-icon-wrapper">
+              <img
+                className="google-icon"
+                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+              />
+            </div>
+            <p className="btn-text">
+              <b>Fazer login com o Google</b>
+            </p>
+          </div>
+
+          <div className="separator">ou </div>
+
+          <form className="space" onSubmit={handleLoginSubmit}>
             <div className="container-login">
               <input
                 type="email"
@@ -54,31 +80,21 @@ export function Registrar() {
                 }
                 placeholder="Digite sua senha"
               />
-
-              <input
-                type="password"
-                className="input-login"
-                value={values.passwordConfirm}
-                onChange={(e) =>
-                  setValues({ ...values, passwordConfirm: e.target.value })
-                }
-                placeholder="Digite sua senha novamente"
-              />
               <button className="button-login" type="submit">
-                cadastrar
+                entrar
               </button>
             </div>
           </form>
 
           <p>
-            Já tem uma conta?{' '}
+            É novo por aqui?{' '}
             <strong
               aria-hidden="true"
               onClick={() => {
-                handlePageLogin();
+                handlePageRegistrar();
               }}
             >
-              Entrar
+              Criar uma conta
             </strong>
           </p>
         </div>

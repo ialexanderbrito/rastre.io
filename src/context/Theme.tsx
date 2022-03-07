@@ -1,10 +1,11 @@
 import { createContext, useContext } from 'react';
 
+import { ThemeContextProps } from 'types/IContext';
 import useLocalStorage from 'use-local-storage';
 
-const Theme = createContext();
+const Theme = createContext<ThemeContextProps>({} as ThemeContextProps);
 
-export function ThemeProvider({ children }) {
+export function ThemeProvider({ children }: any) {
   const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const [theme, setTheme] = useLocalStorage(
     'theme',

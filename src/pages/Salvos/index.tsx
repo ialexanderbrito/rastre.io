@@ -1,11 +1,11 @@
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
 
-import { Header } from 'components/Header';
-
 import { useAuth } from 'context/Auth';
 import { useRastreamento } from 'context/Rastreamento';
 import { useTheme } from 'context/Theme';
+
+import { Header } from 'components/Header';
 
 import './styles.scss';
 
@@ -16,7 +16,7 @@ export function Salvos() {
 
   const { theme } = useTheme();
 
-  async function buscarRastreio(rastreio) {
+  async function buscarRastreio(rastreio: string) {
     navigate('/rastreio');
 
     setCodigoRastreio(rastreio);
@@ -40,14 +40,14 @@ export function Salvos() {
           ) : (
             <>
               {!user ||
-                !user.user_metadata.rastreios ||
-                user.user_metadata.rastreios.length === 0 ? (
+              !user.user_metadata.rastreios ||
+              user.user_metadata.rastreios.length === 0 ? (
                 <h1>Você não possui rastreios cadastrados</h1>
               ) : (
                 <>
                   {!!user &&
                     !!user.user_metadata.rastreios &&
-                    user.user_metadata.rastreios.map((rastreio) => (
+                    user.user_metadata.rastreios.map((rastreio: string) => (
                       <div className="container-rastreio" key={rastreio}>
                         <div
                           aria-hidden="true"
