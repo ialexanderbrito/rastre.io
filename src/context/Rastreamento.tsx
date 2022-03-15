@@ -38,10 +38,17 @@ export function RastreamentoProvider({ children }: any) {
         const { data, status } = await getRastreio(codigoRastreio);
 
         if (status === 200) {
-          setObjeto(data.objetos[0]);
-          toast.success('Informações do rastreio obtidas com sucesso.', {
-            id: 'rastreio',
-          });
+          if (data.objetos[0].eventos === undefined) {
+            toast.error(data.objetos[0].mensagem, {
+              id: 'rastreio',
+            });
+            setObjeto([]);
+          } else {
+            setObjeto(data.objetos[0]);
+            toast.success('Informações do rastreio obtidas com sucesso.', {
+              id: 'rastreio',
+            });
+          }
         }
 
         if (status !== 200) {
@@ -49,11 +56,6 @@ export function RastreamentoProvider({ children }: any) {
             id: 'rastreio',
           });
         }
-
-        toast.success('Informações do rastreio obtidas com sucesso.', {
-          id: 'rastreio',
-        });
-        // setCodigoRastreio('');
       }
     } catch (error) {
       toast.error('Não foi possível obter as informações do rastreio.', {
