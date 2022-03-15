@@ -24,6 +24,16 @@ export function Header() {
     navigate('/salvos');
   }
 
+  function verificarURL() {
+    const url = window.location.pathname;
+
+    if (url === '/rastreio') {
+      return 'Rastreio';
+    }
+
+    return 'CEP';
+  }
+
   return (
     <div className="header">
       <div className="container-left">
@@ -38,24 +48,25 @@ export function Header() {
               : () => window.location.replace('/rastreio')
           }
         />
-
-        <strong
-          aria-hidden="true"
-          onClick={() => {
-            navigateToRastreio();
-          }}
-        >
-          rastre.io
-        </strong>
-
-        <strong
-          aria-hidden="true"
-          onClick={() => {
-            navigateToCep();
-          }}
-        >
-          busca.cep
-        </strong>
+        {verificarURL() === 'Rastreio' ? (
+          <strong
+            aria-hidden="true"
+            onClick={() => {
+              navigateToCep();
+            }}
+          >
+            busca.cep
+          </strong>
+        ) : (
+          <strong
+            aria-hidden="true"
+            onClick={() => {
+              navigateToRastreio();
+            }}
+          >
+            rastre.io
+          </strong>
+        )}
       </div>
 
       <div className="mode">
