@@ -24,49 +24,41 @@ export function Header() {
     navigate('/salvos');
   }
 
-  function verificarURL() {
-    const url = window.location.pathname;
-
-    if (url === '/cep') {
-      return 'CEP';
-    }
-
-    return 'Rastreio';
-  }
-
   return (
     <div className="header">
-      <img
-        aria-hidden="true"
-        src={logoImg}
-        alt="Logo"
-        className="logo"
-        onClick={
-          !user
-            ? () => window.location.replace('/')
-            : () => window.location.replace('/rastreio')
-        }
-      />
+      <div className="container-left">
+        <img
+          aria-hidden="true"
+          src={logoImg}
+          alt="Logo"
+          className="logo"
+          onClick={
+            !user
+              ? () => window.location.replace('/')
+              : () => window.location.replace('/rastreio')
+          }
+        />
+
+        <strong
+          aria-hidden="true"
+          onClick={() => {
+            navigateToRastreio();
+          }}
+        >
+          rastre.io
+        </strong>
+
+        <strong
+          aria-hidden="true"
+          onClick={() => {
+            navigateToCep();
+          }}
+        >
+          busca.cep
+        </strong>
+      </div>
+
       <div className="mode">
-        {verificarURL() === 'CEP' ? (
-          <strong
-            aria-hidden="true"
-            onClick={() => {
-              navigateToRastreio();
-            }}
-          >
-            rastre.io
-          </strong>
-        ) : (
-          <strong
-            aria-hidden="true"
-            onClick={() => {
-              navigateToCep();
-            }}
-          >
-            busca.cep
-          </strong>
-        )}
         <strong
           aria-hidden="true"
           onClick={() => {
@@ -113,6 +105,11 @@ export function Header() {
                 </div>
               )}
             </div>
+            <img
+              src={user.user_metadata.avatar_url}
+              alt={user.user_metadata.full_name}
+              className="avatar"
+            />
           </>
         )}
       </div>

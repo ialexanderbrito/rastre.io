@@ -22,11 +22,26 @@ strong {
   }
 }
 
+.container-left {
+  display: flex;
+  align-items: center;
+  width: 15rem;
+  justify-content: space-between;
+}
+
 .mode {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 20rem;
+  width: 15rem;
+}
+
+.avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--text-secondary);
+  margin-right: 1rem;
 }
 
 .icon {
