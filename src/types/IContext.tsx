@@ -152,6 +152,7 @@ export type AuthContextProps = {
   handlePageLogin: () => void;
   handleLogout: () => void;
   handleLoginGoogle: () => void;
+  handleLoginGithub: () => void;
 };
 
 export type CepContextProps = {

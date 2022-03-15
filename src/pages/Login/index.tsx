@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 
+import logoGithub from 'assets/github-icon.svg';
+import logoGoogle from 'assets/google-icon.svg';
 import { useAuth } from 'context/Auth';
 import { useTheme } from 'context/Theme';
 
@@ -15,6 +17,7 @@ export function Login() {
     handleLoginSubmit,
     handlePageRegistrar,
     handleLoginGoogle,
+    handleLoginGithub,
   } = useAuth();
 
   const { theme } = useTheme();
@@ -42,16 +45,28 @@ export function Login() {
 
           <div
             aria-hidden="true"
+            className="github-btn"
+            onClick={() => {
+              handleLoginGithub();
+            }}
+          >
+            <div className="github-icon-wrapper">
+              <img className="github-icon" src={logoGithub} />
+            </div>
+            <p className="btn-text">
+              <b>Fazer login com o Github</b>
+            </p>
+          </div>
+
+          <div
+            aria-hidden="true"
             className="google-btn"
             onClick={() => {
               handleLoginGoogle();
             }}
           >
             <div className="google-icon-wrapper">
-              <img
-                className="google-icon"
-                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-              />
+              <img className="google-icon" src={logoGoogle} />
             </div>
             <p className="btn-text">
               <b>Fazer login com o Google</b>

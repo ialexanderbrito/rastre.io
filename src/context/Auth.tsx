@@ -89,6 +89,26 @@ export function AuthProvider({ children }: any) {
     setUser(userData);
   }
 
+  async function handleLoginGithub() {
+    const { user: userData, error } = await supabase.auth.signIn({
+      provider: 'github',
+    });
+
+    if (!userData) return;
+
+    if (error && error.message === 'Email not confirmed') {
+      toast.error('Por favor, confirme seu email', { id: 'login' });
+      return;
+    }
+
+    if (error) {
+      toast.error('Erro ao logar', { id: 'login' });
+      return;
+    }
+
+    setUser(userData);
+  }
+
   async function handleRegisterSubmit(event: { preventDefault: () => void }) {
     event.preventDefault();
 
@@ -155,6 +175,7 @@ export function AuthProvider({ children }: any) {
         handlePageLogin,
         handleLogout,
         handleLoginGoogle,
+        handleLoginGithub,
       }}
     >
       {children}
