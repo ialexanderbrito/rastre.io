@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiCorreios = axios.create({
-  baseURL: `https://cors-all-proxy.herokuapp.com/fetch/https://proxyapp.correios.com.br/v1/sro-rastro/`,
+  baseURL: `https://cors.ialexanderbrito.dev/fetch/https://proxyapp.correios.com.br/v1/sro-rastro/`,
 });
 
 const apiCep = axios.create({
